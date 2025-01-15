@@ -13,6 +13,13 @@ export default defineConfig({
         }),
         react(),
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                quietDeps: true
+            }
+        }
+    },
     server: {
         host: '104.168.142.188',
     }
