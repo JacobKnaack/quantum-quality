@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5">
     <h1 class="">Upload JSON File</h1>
-    <form action="{{ route('upload-json') }}" method="POST" enctype="multipart/form-data" class="mb-3">
+    <form action="{{ route('json') }}" method="POST" enctype="multipart/form-data" class="mb-3">
         @csrf
         <div class="input-group">
             <input type="file" name="json_file" accept=".json" class="form-control">

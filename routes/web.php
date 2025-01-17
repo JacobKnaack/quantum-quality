@@ -26,7 +26,7 @@ Route::get('/upload', function() {
     return view('upload');
 })->name('upload');
 
-Route::post('/upload-json', function (Request $request) {
+Route::post('/json', function (Request $request) {
     if ($request->hasFile('json_file')) {
         $file = $request->file('json_file');
 
@@ -39,8 +39,8 @@ Route::post('/upload-json', function (Request $request) {
 
         $prettyJson = json_encode(json_decode($jsonContent), JSON_PRETTY_PRINT);
 
-       return view('json-viewer', ['json' => $prettyJson]);
+       return view('json', ['json' => $prettyJson]);
     }
 
     return redirect()->back()->with('error', 'No File uploaded');
-})->name('upload-json');
+})->name('json');

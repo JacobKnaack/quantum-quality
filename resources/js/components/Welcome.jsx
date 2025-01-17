@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 
 function Welcome() {
   return (
@@ -32,6 +31,4 @@ function Welcome() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('welcome')).render(     
-  <Welcome /> 
-);
+export default Welcome;
