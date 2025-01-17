@@ -18,6 +18,11 @@ function Welcome() {
                     Get Started
                   </a>
                 </button>
+                <button className="btn btn-secondary">
+                  <a href="/upload">
+                    Upload JSON file
+                  </a>
+                </button>
               </div>
             </div>
           </div>

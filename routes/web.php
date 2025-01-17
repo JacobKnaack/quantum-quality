@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,25 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/upload', function() {
+    return view('upload');
+})->name('upload');
+
+Route::post('/upload-json', function (Request $request) {
+    if ($request->hasFile('json_file')) {
+        $file = $request->file('json_file');
+
+        // TODO: store file somewhere for later reference
+        // $originalFilename = $file->getClientOriginalName();
+
+        // $uniqueFileName = uniqid() . '_' . $originalFileName;
+
+        $jsonContent = File::get($file->getRealPath());
+
+        $prettyJson = json_encode(json_decode($jsonContent), JSON_PRETTY_PRINT);
+
+       return view('json-viewer', ['json' => $prettyJson]);
+    }
+
+    return redirect()->back()->with('error', 'No File uploaded');
+})->name('upload-json');
