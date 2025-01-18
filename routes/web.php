@@ -25,6 +25,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/upload', function() {
     return view('upload');
 })->name('upload');
+Route::get('/json', function() {
+    return view('upload');
+})->name('upload');
 
 Route::post('/json', function (Request $request) {
     if ($request->hasFile('json_file')) {

@@ -20,21 +20,21 @@ import './bootstrap';
 function App() {
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/json" element={<JsonViewer json={window.jsonData} />} />
-            </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/json" element={<JsonViewer json={window.jsonData} />} />
+        </Routes>
+      </BrowserRouter>
     );
 }
 
 const renderApp = () => {
-    const appRoot = document.getElementById('root');
+  const appRoot = document.getElementById('root');
 
-    if (appRoot) {
-        ReactDOM.createRoot(appRoot).render(<App />);
-    }
+  if (appRoot) {
+    ReactDOM.createRoot(appRoot).render(<App />);
+  }
 }
 
 renderApp();
