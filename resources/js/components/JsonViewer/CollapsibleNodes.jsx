@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 /**
  * Collapsible Nodes -> Clickable object properties that let the user open an close nested arrays and object.
+ * 
+ * Syntax Highlighting -> using color themes for properties, values, brackets, making it much easier to read.
+ * Priority -> 0 (must have)
  */
 
 const NodeContainer = styled.div`
@@ -35,6 +38,11 @@ const NodeItem = styled.li`
 
   & > strong {
     margin-right: 5px;
+    color: #0074c1;
+  }
+
+  & > span {
+    color: #2ecc71; /* Value color */
   }
 
   & > div {
@@ -45,7 +53,6 @@ const NodeItem = styled.li`
 `;
 
 function CollapsibleNodes({ data }) {
-  const tree = JSON.parse(data);
   const [collapsedKeys, setCollapsedKeys] = useState({});
 
   const toggleCollapse = (key) => {
@@ -55,11 +62,11 @@ function CollapsibleNodes({ data }) {
     });
   };
   const renderJson = (root, parentKey = '') => {
-    if (Array.isArray(root) && data.length === 0) {
+    if (Array.isArray(root) && root.length === 0) {
       return <span>[]</span>;
     }
 
-    if (Object.keys(root).length === 0 && data.constructor === Object) {
+    if (Object.keys(root).length === 0 && root.constructor === Object) {
       return <span>{'{}'}</span>;
     }
 
@@ -93,7 +100,7 @@ function CollapsibleNodes({ data }) {
     
   return (
     <NodeContainer>
-      {renderJson(tree)}
+      {renderJson(data)}
     </NodeContainer>
   );
 }

@@ -1,20 +1,15 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import CollapsibleNodes from './CollapsibleNodes';
+import SearchNodes from './SearchNodes';
 /**
  * 
  * TODOS:
 
- * Syntax Highlighting -> using color themes for properties, values, brackets, making it much easier to read.
- * Priority -> 0 (must have)
-
- * Search Functionality -> text field that gives user the ability to seach their tree for keys and values.
- * Priority -> 1 (nice to have)
-
  * Copy to clip board -> button to copy entire JSON object or part of a JSON object with a click.
  * Priority -> 1 (nice to have)
 
- * Tree View Toggle -> Provide an optio to switch from raw JSON view and a tree for better
+ * Tree View Toggle -> Provide an option to switch from raw JSON view and a tree for better
  * vizualization of the top down structure.
  * Priority -> 2 (helpful)
  
@@ -43,10 +38,22 @@ const Container = styled.div`
 
 // json: string
 function JsonViewer({ json }) {
-  
+  const tree = JSON.parse(json);
+  const [nodes, setNodes] = useState(tree);
+
+  const handleNodeSearch = (results) => {
+    if (results.length) {
+      console.log(results);
+      setNodes(results);
+    } else {
+      setNodes(tree);
+    }
+  }
+
   return (
     <Container>
-      <CollapsibleNodes data={json}/>
+      <SearchNodes nodes={tree} handleResults={handleNodeSearch} />
+      <CollapsibleNodes data={nodes}/>
     </Container>
   )
 }

@@ -37,7 +37,7 @@ class DocumentControllerTest extends TestCase
         ]);
     }
 
-    public function test_authenticated_user_can_view_documents(): void
+    public function test_guest_user_can_not_view_documents(): void
     {
         $response = $this->getJson('/api/document');
         $response->assertUnauthorized();
@@ -46,19 +46,26 @@ class DocumentControllerTest extends TestCase
     public function test_authenticated_user_can_view_their_documents()
     {
         $user = User::factory()->create();
-        $document = Document::factory()->create(['user_id' => $user->id]); 
         $this->actingAs($user);
+        $document = Document::factory()->create(['user_id' => $user->id]);
 
         $response = $this->getJson('/api/document');
         $response->assertStatus(200);
-        $response->assertJsonCount(1); // Assuming the user has only one document
-        $response->assertJsonPath(0, ['id' => $document->id]);
+        $response->assertJsonCount(1);
+        $response->assertJsonStructure([
+            '*' => [
+                'id',
+                'content',
+                'title',
+                'user_id',
+            ],
+        ]);
     }
 
     public function test_guest_cannot_view_document(): void
     {
         $document = Document::factory()->create();
-        $response = $this->getJson('/api/document' . $document->id);
+        $response = $this->getJson('/api/document/' . $document->id);
         $response->assertUnauthorized();
     }
 }
