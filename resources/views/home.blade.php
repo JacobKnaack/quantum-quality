@@ -15,6 +15,18 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <section class="container">
+                        <nav>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/upload') }}">
+                                        Upload Document
+                                    </a>
+                                </li>
+                            </ul>
+                        <nav>
+                    </section>
                 </div>
             </div>
         </div>

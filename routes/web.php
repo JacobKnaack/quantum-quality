@@ -22,12 +22,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/upload', function() {
-    return view('upload');
-})->name('upload');
-Route::get('/json', function() {
-    return view('upload');
-})->name('upload');
+Route::get('/upload', [App\Http\Controllers\UploadController::class, 'index'])->name('upload');
+Route::get('/json', [App\Http\Controllers\UploadController::class, 'index'])->name('upload');
 
 Route::post('/json', function (Request $request) {
     if ($request->hasFile('json_file')) {

@@ -10,16 +10,11 @@ function Welcome() {
               <h1 className="text-center">Welcome</h1>
             </div>
             <div className="card-body">
-              <p className="lead text-center">Welcome to My Server.  Features are still under construction.</p>
+              <p className="lead text-center">Welcome to My Document Sharing Server</p>
               <div className="text-center">
                 <button className="btn btn-primary">
                   <a href="/login">
                     Get Started
-                  </a>
-                </button>
-                <button className="btn btn-secondary">
-                  <a href="/upload">
-                    Upload JSON file
                   </a>
                 </button>
               </div>
