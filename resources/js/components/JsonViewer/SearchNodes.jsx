@@ -20,6 +20,32 @@ const SearchInput = styled.input`
  * Search Functionality -> text field that gives user the ability to search their tree for keys and values.
  * Priority -> 1 (nice to have)
 */
+function searchJson(data, searchString) {
+  const results = new Set();
+
+  function traverse(obj) {
+      for (const key in obj) {
+          const value = obj[key];
+
+          if (typeof value === 'object' && !Array.isArray(value)) {
+              traverse(value);
+          } else if (Array.isArray(value)) {
+              value.forEach(item => {
+              if (typeof item === 'object') {
+                  traverse(item);
+              } else if (typeof item === 'string' && (item.includes(searchString) || key.includes(searchString))) {
+                  results.add({ [key]: value });
+              }
+              });
+          } else if (typeof value === 'string' && (value.includes(searchString) || key.includes(searchString))) {
+              results.add({ [key]: value });
+          }
+      }
+  }
+
+  traverse(data);
+  return Array.from(results);
+}
 
 function SearchNodes({
   nodes,
@@ -28,26 +54,18 @@ function SearchNodes({
   const [searchValue, setSearchValue] = useState('');
   const [results, setResults] = useState([]);
 
-  const traverseNodes = (root, search, set) => {
-    for (let key in root) {
-      if (root.hasOwnProperty(key)) {
-        if (key.toLowerCase().includes(search.toLowerCase())) {
-          set(root[key])
-        }
-        if (typeof root[key] === 'object' && root[key]) {
-          traverseNodes(root[key], search, set);
-        }
-      }
-    }
-  };
-
   const handleSearch = (e) => {
     const formValue = e.target.value;
     setSearchValue(formValue);
-
-    traverseNodes(nodes, formValue, setResults);
   };
 
+  useEffect(() => {
+    if (searchValue) {
+      setResults(searchJson(nodes, searchValue));
+    } else {
+      setResults(nodes);
+    }
+  }, [searchValue]);
   useEffect(() => {
     if (results) {
       handleResults(results);
