@@ -30,6 +30,9 @@
                 </div>
             </div>
         </div>
+        @auth
+            <div class="col-md-8" id="root"></div>
+        @endauth
     </div>
 </div>
 @endsection

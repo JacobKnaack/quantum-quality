@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import Welcome from  './components/Welcome';
 import JsonViewer from './components/JsonViewer';
+import Home from './components/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 /**
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/json" element={<JsonViewer json={window.jsonData} />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
     );
