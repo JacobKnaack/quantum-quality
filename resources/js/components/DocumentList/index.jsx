@@ -42,6 +42,25 @@ function DocumentList() {
     return (
         <>
             <div className="card-header">Your Documents</div>
+            <div className="card-body">
+                {error && (
+                    <p className="card-text">{error.message}</p>
+                )}
+                {loading && (
+                    <div className="spinner-border" role="status">
+                        <p className="sr-only">Loading</p>
+                    </div>
+                )}
+                {documents.length && (
+                    <ul className="list-group">
+                        {documents.map((doc, idx) => (
+                            <li key={idx} className="list-group-item">
+                                <a>{doc.title}</a>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </>
     )
 }
