@@ -25,7 +25,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/upload', [App\Http\Controllers\UploadController::class, 'index'])->name('upload');
-Route::get('/json', [App\Http\Controllers\UploadController::class, 'index'])->name('upload');
+// Route::get('/json/{id}', ); how can we fetch documents from the Document controller first?
 
 Route::post('/json', function (Request $request) {
     if ($request->hasFile('json_file')) {
@@ -33,7 +33,6 @@ Route::post('/json', function (Request $request) {
         $jsonContent = File::get($file->getRealPath());
 
         try {
-            // TODO: store file somewhere for later reference
             $data = json_decode($jsonContent, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 return back()->with('error', 'Invalid JSON file');

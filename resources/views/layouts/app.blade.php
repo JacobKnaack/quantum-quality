@@ -49,6 +49,20 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+
+                            @if (Route::has('/'))
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('upload'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/upload') }}">
+                                        Upload Document
+                                    </a>
+                                </li>
+                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
